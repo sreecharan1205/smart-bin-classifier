@@ -1,0 +1,8 @@
+# Python environment and caches
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+
+# Data pack must NOT be committed (assignment rule)
+data/
+*.zip
