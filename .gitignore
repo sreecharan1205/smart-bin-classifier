@@ -6,5 +6,6 @@ __pycache__/
 # Data pack must NOT be committed (assignment rule)
 data/
 *.zip
-   .virtual_documents/
-   app_data.zip
+
+# Kaggle temporary files
+.virtual_documents/
