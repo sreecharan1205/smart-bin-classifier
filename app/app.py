@@ -54,10 +54,16 @@ def ensure_data():
         return False
     DATA.mkdir(parents=True, exist_ok=True)
     tmp = DATA / "_download.zip"
-    urllib.request.urlretrieve(url, tmp)
-    with zipfile.ZipFile(tmp) as z:
-        z.extractall(DATA)
-    tmp.unlink()
+    try:
+        urllib.request.urlretrieve(url, tmp)
+        with zipfile.ZipFile(tmp) as z:          # fails cleanly if the link returned a web page, not a zip
+            z.extractall(DATA)
+    except Exception as e:
+        st.error(f"Could not download the app data from APP_DATA_URL ({type(e).__name__}). "
+                 "Check the link is shared as 'Anyone with the link'.")
+        return False
+    finally:
+        tmp.unlink(missing_ok=True)
     return (DATA / "catalogue.csv").exists()
 
 
