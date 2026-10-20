@@ -1,0 +1,17 @@
+# Smart Bin Classifier - Python 3.13
+# PyTorch CPU builds (small; no GPU needed to run the app or the evaluation)
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.8.0
+torchvision==0.23.0
+
+# App
+streamlit>=1.40
+pillow>=10.0
+numpy>=1.26
+pandas>=2.2
+
+# Notebooks (data prep, EDA, training, evaluation)
+scikit-learn>=1.5
+joblib>=1.4
+matplotlib>=3.8
+ipykernel>=6.29

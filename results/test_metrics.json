@@ -1,0 +1,128 @@
+{
+ "product_level": {
+  "A majority": {
+   "presence precision": 0.0,
+   "presence recall": 0.0,
+   "presence F1": 0.0,
+   "count exact (all answers)": 0.9,
+   "count exact (product present)": 0.0,
+   "MAE (all answers)": 0.1265,
+   "MAE (product present)": 1.265
+  },
+  "B features + LR": {
+   "presence precision": 0.5826,
+   "presence recall": 0.63,
+   "presence F1": 0.5983,
+   "count exact (all answers)": 0.8985,
+   "count exact (product present)": 0.48,
+   "MAE (all answers)": 0.12,
+   "MAE (product present)": 0.615
+  },
+  "C fine-tuned ResNet-18": {
+   "presence precision": 0.8383,
+   "presence recall": 0.765,
+   "presence F1": 0.7892,
+   "count exact (all answers)": 0.9485,
+   "count exact (product present)": 0.65,
+   "MAE (all answers)": 0.0655,
+   "MAE (product present)": 0.415
+  }
+ },
+ "order_level": {
+  "A majority": {
+   "order accuracy": 0.5,
+   "bad orders caught (FAIL recall)": 1.0,
+   "good orders passed (PASS recall)": 0.0,
+   "wrong PASS (bad order shipped)": 0.0,
+   "wrong FAIL (good order re-checked)": 200.0
+  },
+  "B features + LR": {
+   "order accuracy": 0.7475,
+   "bad orders caught (FAIL recall)": 0.96,
+   "good orders passed (PASS recall)": 0.535,
+   "wrong PASS (bad order shipped)": 8.0,
+   "wrong FAIL (good order re-checked)": 93.0
+  },
+  "C fine-tuned ResNet-18": {
+   "order accuracy": 0.83,
+   "bad orders caught (FAIL recall)": 0.965,
+   "good orders passed (PASS recall)": 0.695,
+   "wrong PASS (bad order shipped)": 7.0,
+   "wrong FAIL (good order re-checked)": 61.0
+  }
+ },
+ "per_product_C": [
+  {
+   "product": "TaoTronics TT-AH002 30W Ultrasonic Humid",
+   "support": 20,
+   "precision": 0.8571,
+   "recall": 0.9,
+   "f1": 0.878
+  },
+  {
+   "product": "Fujifilm Instax Mini Instant Film (3 Twi",
+   "support": 20,
+   "precision": 0.8889,
+   "recall": 0.8,
+   "f1": 0.8421
+  },
+  {
+   "product": "RTIC 30 oz. Tumbler",
+   "support": 20,
+   "precision": 0.75,
+   "recall": 0.75,
+   "f1": 0.75
+  },
+  {
+   "product": "Pumpkin Pie Quest Bars 2 Pack Total of 2",
+   "support": 20,
+   "precision": 0.9412,
+   "recall": 0.8,
+   "f1": 0.8649
+  },
+  {
+   "product": "Laser Lights Outdoor Starry Projector Re",
+   "support": 20,
+   "precision": 1.0,
+   "recall": 0.7,
+   "f1": 0.8235
+  },
+  {
+   "product": "Best Microfiber Cleaning Cloth, Pack of ",
+   "support": 20,
+   "precision": 0.9048,
+   "recall": 0.95,
+   "f1": 0.9268
+  },
+  {
+   "product": "Lifetime Warranty FDA cleared OTC Health",
+   "support": 20,
+   "precision": 0.7895,
+   "recall": 0.75,
+   "f1": 0.7692
+  },
+  {
+   "product": "3M 8511 Particulate N95 Respirator with ",
+   "support": 20,
+   "precision": 0.8125,
+   "recall": 0.65,
+   "f1": 0.7222
+  },
+  {
+   "product": "UP2 by Jawbone Activity + Sleep Tracker,",
+   "support": 20,
+   "precision": 0.8182,
+   "recall": 0.45,
+   "f1": 0.5806
+  },
+  {
+   "product": "AuYou Wi-Fi Smart Outlet Switch, 5 Outle",
+   "support": 20,
+   "precision": 0.6207,
+   "recall": 0.9,
+   "f1": 0.7347
+  }
+ ],
+ "n_test_bins": 200,
+ "n_orders": 400
+}
