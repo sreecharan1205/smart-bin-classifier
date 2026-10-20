@@ -223,12 +223,8 @@ if mode == "Order + matching bin":
                 if st.button("Show another matching bin") or key not in st.session_state:
                     st.session_state[key] = random.choice(bins)
                 bin_id = st.session_state[key]
-                if not exact:
-                    st.warning("No bin holds the whole order (in this data almost no bin holds two catalogue "
-                               "products), so the closest bin is shown. You can choose another bin. "
-                               "PASS or FAIL is decided only by the model's reading of the photo.")
-                else:
-                    st.caption(f"{len(bins)} bins hold this order; one is shown.")
+                # When no bin holds the whole order, the closest bin is shown without a note;
+                # PASS/FAIL always comes from the model's reading of the photo.
         else:
             all_bins = sorted(INDEX)
             bin_id = st.selectbox("Bin id (train or validation)", all_bins, index=0)
