@@ -44,10 +44,31 @@ def secret(name):
         return None
 
 
+def data_ready():
+    return (DATA / "catalogue.csv").exists() and (DATA / "train" / "metadata").is_dir()
+
+
+def extract_zip(path, dest):
+    """
+    Unzip into dest. Zips made by Windows PowerShell store paths with backslashes (train\\images\\1.jpg),
+    which Linux would treat as file names, so they are converted to normal folder paths here.
+    Entries that would land outside dest are skipped.
+    """
+    dest = dest.resolve()
+    with zipfile.ZipFile(path) as z:            # fails cleanly if the link returned a web page, not a zip
+        for info in z.infolist():
+            name = info.filename.replace("\\", "/")
+            target = (dest / name).resolve()
+            if name.endswith("/") or not str(target).startswith(str(dest)):
+                continue
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(z.read(info))
+
+
 @st.cache_resource(show_spinner="Getting the app's bin photos…")
 def ensure_data():
     """On the cloud host the data pack is not in the repo: download it once from APP_DATA_URL."""
-    if (DATA / "catalogue.csv").exists():
+    if data_ready():
         return True
     url = secret("APP_DATA_URL")
     if not url:
@@ -56,15 +77,14 @@ def ensure_data():
     tmp = DATA / "_download.zip"
     try:
         urllib.request.urlretrieve(url, tmp)
-        with zipfile.ZipFile(tmp) as z:          # fails cleanly if the link returned a web page, not a zip
-            z.extractall(DATA)
+        extract_zip(tmp, DATA)
     except Exception as e:
         st.error(f"Could not download the app data from APP_DATA_URL ({type(e).__name__}). "
                  "Check the link is shared as 'Anyone with the link'.")
         return False
     finally:
         tmp.unlink(missing_ok=True)
-    return (DATA / "catalogue.csv").exists()
+    return data_ready()
 
 
 @st.cache_resource(show_spinner="Loading the model…")
@@ -109,7 +129,7 @@ def matching_bins(order, index):
     full = [b for b in index if satisfied(b) == len(order)]
     if full:
         return sorted(full), True
-    best = max(satisfied(b) for b in index)
+    best = max((satisfied(b) for b in index), default=0)
     return sorted(b for b in index if satisfied(b) == best and best > 0), False
 
 
