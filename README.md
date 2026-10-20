@@ -92,6 +92,16 @@ The trained model is in the repository: `models/smartbin_resnet18.pt` (22 MB, we
   dataset holds two catalogue products (276483); it is placed in train so the app can show a multi-item PASS.
   `catalogue.csv` holds ASIN, name, size, weight and bin counts per split; the script checks the counts against
   the label files.
+- **How `catalogue.csv` was generated and verified** (`prepare_data.py`, functions `choose_catalogue`,
+  `write_pack`, `run_checks`):
+  1. Count, over the 350,909 clean bins, how many bins contain each ASIN (a bin counts once per ASIN).
+  2. Keep the 10 ASINs with the highest counts (from about 200 up to about 480 clean bins each).
+  3. For each, take the name, height, length, width and weight from the metadata of the first selected bin that
+     holds it, and add how many selected bins contain it in total and per split.
+  4. Checks that stop the script if they fail: 10 unique ASINs; every name non-empty; every ASIN in **at least 100**
+     of the 2,000 bins (actual: 198–203); and the per-split counts in `catalogue.csv` equal an independent recount
+     from each split's `labels.csv`. The EDA notebook found 3 products whose recorded size differs between bins, so
+     sizes are approximate.
 - **Split:** 70% train / 10% validation / 10% test / 10% blind, seed 42, stratified by each bin's main catalogue
   product. Checks: every bin in exactly one split, no exact duplicate photo, and no near-duplicate photo across
   splits (difference-hash; the closest cross-split pair differs in 35 of 256 bits).
@@ -128,7 +138,14 @@ Questions emailed to Brainwave on 20 Oct 2026:
 2. The 1–5 units rule is listed under "Splits and the blind set". Does it apply to all 2,000 bins?
 3. I chose 10 products at about 200 bins each rather than 20 at about 100. Was a catalogue size expected?
 
-Replies: *none received yet (update before submitting).*
+Replies from Satwik (20 Oct 2026):
+1. **Accepted.** The app may show a non-matching bin and let the user pick another, but PASS/FAIL must come from
+   the model's predictions against the ordered quantities. This is how it works: `validate()` receives only the photo
+   and the order; the closest-bin choice never affects the result.
+2. **Confirmed:** the 1–5 units rule applies to all 2,000 bins, with per-product quantities checked against
+   `EXPECTED_QUANTITY`.
+3. **Accepted:** no fixed catalogue size; each catalogue ASIN must appear in at least 100 of the 2,000 bins, and
+   `catalogue.csv` must be generated from the metadata with its selection and verification documented (below).
 
 Assumptions are listed in [`assumptions.md`](assumptions.md).
 

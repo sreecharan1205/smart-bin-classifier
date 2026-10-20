@@ -225,7 +225,8 @@ if mode == "Order + matching bin":
                 bin_id = st.session_state[key]
                 if not exact:
                     st.warning("No bin holds the whole order (in this data almost no bin holds two catalogue "
-                               "products). Showing the closest bin, so this order is expected to FAIL.")
+                               "products), so the closest bin is shown. You can choose another bin. "
+                               "PASS or FAIL is decided only by the model's reading of the photo.")
                 else:
                     st.caption(f"{len(bins)} bins hold this order; one is shown.")
         else:
