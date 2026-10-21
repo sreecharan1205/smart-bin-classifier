@@ -174,6 +174,19 @@ st.title("📦 Smart Bin Classifier")
 st.caption("Build an order, pick a bin photo, and check whether the bin holds the order. "
            "The model looks only at the photo.")
 
+with st.expander("How to use this app"):
+    st.markdown(
+        "1. **Build the order:** choose one or more products and a quantity (1–5) for each.\n"
+        "2. **Bin photo:** the app shows a bin that holds the order (or the closest one). "
+        "Use *Show another matching bin* or *Choose a different bin* to try others.\n"
+        "3. **Validate:** the model looks only at the photo and reports, per item, the ordered and found "
+        "quantity and PASS or FAIL. The order passes only if every item passes.\n\n"
+        "**Blind mode** (left panel): type a bin id from the blind folder, e.g. `103072`, then validate "
+        "on that photo alone.\n\n"
+        "**Results:** *item not found* = none found; *fewer units found* = some, but fewer than ordered. "
+        "Every check is saved in the **Validation log** at the bottom of the page."
+    )
+
 if not ensure_data():
     st.error("The data pack was not found. Unzip data_pack.zip into the project's data/ folder "
              "(or set APP_DATA_URL on the cloud host).")

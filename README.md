@@ -78,6 +78,7 @@ The trained model is in the repository: `models/smartbin_resnet18.pt` (22 MB, we
 | `results/` | Test metrics, test orders, wrong predictions, charts |
 | `logs/validation_log.csv` | Log of real validation requests from the app |
 | `assumptions.md`, `ai_usage_log.md` | Assumptions and a dated record of AI tool use |
+| `USER_GUIDE.md` | Short user guide for the app (optional extra); also shown in the app as *How to use this app* |
 
 ## Data and splits
 

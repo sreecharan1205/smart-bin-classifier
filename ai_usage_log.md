@@ -14,3 +14,5 @@
 | 20 Oct | Claude (free) | Wrote the Streamlit app with logging | Clicked through PASS, FAIL, bad input and blind mode locally |
 | 20 Oct | Claude (free) | **AI was wrong:** the deployed app showed 0 bins. The data zip made on Windows stored paths with backslashes, which Linux treats as file names; Claude fixed the unzip and the empty-index crash | Read the cloud error trace; reproduced it with a Windows-style zip in a test; checked the live app shows 1,600 bins |
 | 20 Oct | Claude (free) | Drafted the README and the failure-case explanations | Compared each explanation with the photos; checked every number against `results/test_metrics.json` |
+| 20 Oct | Claude (free) | Ran my model on all validation bins to list where it disagrees with the records (demo prep) | Looked at the photos of the clearest cases myself |
+| 21 Oct | Claude (free) | Wrote the user guide (optional extra) and the in-app "How to use" box | Followed the guide step by step in the app |
